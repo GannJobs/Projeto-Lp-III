@@ -2,6 +2,7 @@ package Classes;
 
 import ClassesAux.Data;
 
+
 public abstract class Pessoa {
     protected String nome;
     protected int idade;
@@ -11,26 +12,15 @@ public abstract class Pessoa {
     protected Data dataNascimento;
     
     public Pessoa(String nome, int idade, String cpf, Data dataN){
-        this.nome = nome;
-        this.idade = idade;
-        this.cpf = cpf;
-        this.dataNascimento = dataN;
+        this(nome,idade, "sem celular","sem email",cpf,dataN);
     }
        
     public Pessoa(String nome, int idade, String telefone, String cpf, Data dataN){
-        this.nome = nome;
-        this.idade = idade;
-        this.telefone = telefone;
-        this.cpf = cpf;
-        this.dataNascimento = dataN;
+        this(nome,idade,telefone,"sem email",cpf,dataN);
     }
     
     public Pessoa(String nome, String email, int idade, String cpf, Data dataN){
-        this.nome = nome;
-        this.idade = idade;
-        this.email = email;
-        this.cpf = cpf;
-        this.dataNascimento = dataN;
+        this(nome,idade,"sem celular", email, cpf,dataN);
     }
     
     public Pessoa(String nome, int idade, String telefone, String email, String cpf, Data dataN){
@@ -42,6 +32,7 @@ public abstract class Pessoa {
         this.dataNascimento = dataN;
     }
     
+    @Override
     public String toString(){
         return "nome: " + nome + "\nidade: " + idade + 
                 "\nData de Nascimento: " + dataNascimento.imprimirDataExtenso() 

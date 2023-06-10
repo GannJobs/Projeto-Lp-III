@@ -1,8 +1,10 @@
 package ClassesAux;
 
-import java.time.LocalDate;
 
-public class Data {
+import java.time.LocalDate;
+import java.util.Calendar;
+
+public final class Data {
     private int dia;
     private int mes;
     private int ano;
@@ -11,10 +13,12 @@ public class Data {
     private static String[] meses = { "janeiro", "fevereiro", "março", "abril", "maio", "junho",
     "julho", "agosto", "setembro", "outubro", "novembro", "dezembro" };
 
+    // construtor sem parametros, vai instanciar o obj com a data atual
     public Data() {
-        this.dia = 1;
-        this.mes = 1;
-        this.ano = 1970;
+        LocalDate dataAtual = LocalDate.now();
+         this.dia = dataAtual.getDayOfMonth();
+         this.mes = dataAtual.getMonthValue();
+         this.ano = dataAtual.getYear();
     }
 
     public Data(int dia, int mes, int ano) {
@@ -37,35 +41,35 @@ public class Data {
         }
     }
 
+    public static int getAnoAtual() {
+        Calendar calendar = Calendar.getInstance();
+        int anoAtual = calendar.get(Calendar.YEAR);
+        return anoAtual;
+    }
+    
     public boolean verificarData(int dia, int mes, int ano) {
         if (dia < 1 || dia > 31 || mes < 1 || mes > 12 || ano < 0) {
             return false;
         }
 
         switch (mes) {
-            case 2:
+            case 2 -> {
                 if (dia > 29 || (dia == 29 && !isAnoBissexto())) {
                     return false;
                 }
-                break;
-            case 4:
-            case 6:
-            case 9:
-            case 11:
+            }
+            case 4, 6, 9, 11 -> {
                 if (dia > 30) {
                     return false;
                 }
-                break;
+            }
         }
 
         return true;
     }
 
     private boolean isAnoBissexto() {
-        if ((ano % 4 == 0 && ano % 100 != 0) || ano % 400 == 0) {
-            return true;
-        }
-        return false;
+        return (ano % 4 == 0 && ano % 100 != 0) || ano % 400 == 0;
     }
     
     public String dayOfWeek() {
@@ -102,4 +106,47 @@ public class Data {
 
         return new Data(dia, mes, ano);
     }
+
+    /**
+     * @return int return the dia
+     */
+    public int getDia() {
+        return dia;
+    }
+
+    /**
+     * @param dia the dia to set
+     */
+    public void setDia(int dia) {
+        this.dia = dia;
+    }
+
+    /**
+     * @return int return the mes
+     */
+    public int getMes() {
+        return mes;
+    }
+
+    /**
+     * @param mes the mes to set
+     */
+    public void setMes(int mes) {
+        this.mes = mes;
+    }
+
+    /**
+     * @return int return the ano
+     */
+    public int getAno() {
+        return ano;
+    }
+
+    /**
+     * @param ano the ano to set
+     */
+    public void setAno(int ano) {
+        this.ano = ano;
+    }
+
 }
