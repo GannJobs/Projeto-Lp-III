@@ -1,18 +1,22 @@
 package Classes;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Departamento {
+
     private String nome;
     private String codigo;
     private Gerente gerenteResponsavel;
-    private ArrayList<Funcionario> funcionarios;
+    private List<Empregado> empregados;
+    private List<Estagiario> estagiarios;
 
     public Departamento(String nome, String codigo, Gerente gerenteResponsavel) {
         this.nome = nome;
         this.codigo = codigo;
         this.gerenteResponsavel = gerenteResponsavel;
-        this.funcionarios = new ArrayList<>();
+        this.empregados = new ArrayList<>();
+        this.estagiarios = new ArrayList<>();
     }
 
     public String getNome() {
@@ -39,49 +43,95 @@ public class Departamento {
         this.gerenteResponsavel = gerenteResponsavel;
     }
 
-    public ArrayList<Funcionario> getFuncionarios() {
-        return funcionarios;
+    public List<Empregado> getEmpregados() {
+        return empregados;
     }
 
-    public void setFuncionarios(ArrayList<Funcionario> funcionarios) {
-        this.funcionarios = funcionarios;
+    public void setEmpregados(List<Empregado> empregados) {
+        this.empregados = empregados;
     }
 
-    public void adicionarFuncionario(Funcionario funcionario) {
-        funcionarios.add(funcionario);
+    public List<Estagiario> getEstagiarios() {
+        return estagiarios;
     }
 
-    public void removerFuncionario(Funcionario funcionario) {
-        funcionarios.remove(funcionario);
+    public void setEstagiarios(List<Estagiario> estagiarios) {
+        this.estagiarios = estagiarios;
     }
 
-    public ArrayList<Funcionario> listarFuncionarios() {
-        return funcionarios;
+    public void adicionarEmpregado(Empregado empregado) {
+        empregados.add(empregado);
     }
 
-    public double calcularMediaSalarial() {
+    public void removerEmpregado(Empregado empregado) {
+        empregados.remove(empregado);
+    }
+
+    public void adicionarEstagiario(Estagiario estagiario) {
+        estagiarios.add(estagiario);
+    }
+
+    public void removerEstagiario(Estagiario estagiario) {
+        estagiarios.remove(estagiario);
+    }
+
+    public List<Empregado> listarEmpregados() {
+        return empregados;
+    }
+
+    public List<Estagiario> listarEstagiarios() {
+        return estagiarios;
+    }
+
+    public double calcularMediaSalarialEmpregados() {
         double totalSalarios = 0;
-        for (Funcionario funcionario : funcionarios) {
-            totalSalarios += funcionario.getSalarioBase();
+        for (Empregado empregado : empregados) {
+            totalSalarios += empregado.getSalarioBase();
         }
-        if (!funcionarios.isEmpty()) {
-            return totalSalarios / funcionarios.size();
+        if (!empregados.isEmpty()) {
+            return totalSalarios / empregados.size();
         } else {
             return 0;
         }
     }
 
-    //vai receber o funcionario que vai receber o aumento
-    //e qual vai ser a porcentagem de aumento a ser recebido
-    public void darAumento(Funcionario funcionario, double aumentoPercentual) {
-        double salarioAtual = funcionario.getSalarioBase();
+    public double calcularMediaSalarialEstagiarios() {
+        double totalSalarios = 0;
+        for (Estagiario estagiario : estagiarios) {
+            totalSalarios += estagiario.getSalarioBase();
+        }
+        if (!estagiarios.isEmpty()) {
+            return totalSalarios / estagiarios.size();
+        } else {
+            return 0;
+        }
+    }
+
+    public void promoverEstagiario(Estagiario estagiario) {
+    Empregado empregadoPromovido = new Empregado(estagiario.getNome(), estagiario.getIdade(), estagiario.getTelefone(), estagiario.getEmail(), estagiario.getCPF(),
+                estagiario.getDataNascimento(), estagiario.getDataAdmissao(), estagiario.getCargo(), estagiario.getDepartamento());
+
+    // Define o salário base do empregado promovido
+    empregadoPromovido.setSalarioBase(estagiario.getSalarioBase() * 1.5f);
+
+    // Exibe informações sobre a promoção
+    System.out.println("Estagiário " + estagiario.getNome() + " promovido para o cargo de Empregado.");
+    System.out.println("Novo salário base: " + empregadoPromovido.getSalarioBase());
+
+    // Remove o estagiário e adiciona o empregado promovido à equipe do gerente
+    estagiarios.remove(estagiario);
+    empregados.add(empregadoPromovido);
+    }
+
+
+    public void darAumentoEmpregado(Empregado empregado, double aumentoPercentual) {
+        double salarioAtual = empregado.getSalarioBase();
         double aumentoValor = salarioAtual * (aumentoPercentual / 100);
         double novoSalario = salarioAtual + aumentoValor;
         
-        funcionario.setSalarioBase((float)novoSalario);
-        System.out.println("Aumento aplicado para o funcionário " + funcionario.getNome());
+        empregado.setSalarioBase((float) novoSalario);
+        System.out.println("Aumento aplicado para o empregado " + empregado.getNome());
         System.out.println("Salário anterior: R$" + salarioAtual);
         System.out.println("Novo salário: R$" + novoSalario);
     }
-
 }

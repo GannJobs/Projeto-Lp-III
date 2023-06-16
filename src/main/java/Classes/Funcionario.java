@@ -13,12 +13,12 @@ public class Funcionario extends Pessoa {
     private Data dataAdmissao;
     private String cargo;
 
-    public Funcionario(String nome, String email, int idade, String cpf, Data dataN, Data dataAdmissao, String cargo) {
-        super(nome, email, idade, cpf, dataN);
+    public Funcionario(String nome, int i, String string, String cpf, String string2, Data dataAdmissao, Data data) {
+        super(nome, i, string, cpf, string2, data);
         Nfuncionarios++;
         this.codigo = Nfuncionarios;
         this.dataAdmissao = dataAdmissao;
-        this.cargo = cargo;
+        this.cargo = "Empregado";
     }
     
     public Funcionario(String nome, int idade, String telefone, String cpf, Data dataN, Data dataAdmissao, String cargo) {

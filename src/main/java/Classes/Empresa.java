@@ -32,7 +32,7 @@ public class Empresa {
     public double calcularFolhaPagamento() {
         double folhaPagamento = 0;
         for (Departamento departamento : departamentos) {
-            for (Funcionario funcionario : departamento.listarFuncionarios()) {
+            for (Funcionario funcionario : departamento.listarEmpregados()) {
                 folhaPagamento += funcionario.getSalarioBase();
             }
         }
