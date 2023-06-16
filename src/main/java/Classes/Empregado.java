@@ -40,4 +40,25 @@ public class Empregado extends Funcionario {
     public String toString() {
         return super.toString() + "\nFunção: " + funcao + "\nDepartamento: " + departamento;
     }
+
+     public int getIdade() {
+        return super.idade;
+    }
+
+    public String getTelefone() {
+        return super.telefone;
+    }
+
+     public String getEmail() {
+        return super.email;
+    }
+
+     public String getCPF() {
+        return super.cpf;
+    }
+
+    public Data getDataNascimento() {
+        return dataNascimento;
+    }
+
 }

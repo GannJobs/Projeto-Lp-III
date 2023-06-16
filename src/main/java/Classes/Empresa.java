@@ -32,12 +32,16 @@ public class Empresa {
     public double calcularFolhaPagamento() {
         double folhaPagamento = 0;
         for (Departamento departamento : departamentos) {
-            for (Funcionario funcionario : departamento.listarEmpregados()) {
-                folhaPagamento += funcionario.getSalarioBase();
+            for (Empregado empregado : departamento.listarEmpregados()) {
+                folhaPagamento += empregado.getSalarioBase();
+            }
+            for (Estagiario estagiario : departamento.listarEstagiarios()) {
+                folhaPagamento += estagiario.getSalarioBase();
             }
         }
         return folhaPagamento;
     }
+
 
     public Diretor getDiretor() {
         return diretor;
@@ -68,6 +72,8 @@ public class Empresa {
     public Departamento getDepartamentoPrincipal() {
         return departamentoPrincipal;
     }
+
+    
 
     public void setDepartamentoPrincipal(Departamento departamentoPrincipal) {
         this.departamentoPrincipal = departamentoPrincipal;
