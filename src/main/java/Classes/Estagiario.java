@@ -26,6 +26,13 @@ public class Estagiario extends Funcionario {
         this.departamento = departamento;
     }
 
+     public Estagiario(String nome, int idade, String telefone, String email, String cpf, Data dataN, Data dataAdmissao, String cargo, String departamento) {
+        super(nome, idade, telefone, email, cpf, dataN, dataAdmissao, cargo);
+        this.duracaoEstagio = 1;
+        this.departamento = departamento;
+    }
+
+    
       public int getIdade() {
         return super.idade;
     }
@@ -57,7 +64,10 @@ public class Estagiario extends Funcionario {
     public void setDepartamento(String departamento) {
         this.departamento = departamento;
     }
-
+     
+    public String getdatas(){
+        return super.getData();
+    }
     @Override
     public double calcularSalarioLiquido() {
         double salarioBruto = super.getSalarioBase() / 2.0; // Metade do salário base
@@ -87,7 +97,8 @@ public class Estagiario extends Funcionario {
         return super.getSalarioBase() / 1.6f; // Half of the base salary
     }
 
-    public Data getDataNascimento() {
+     public Data getDataNascimento() {
         return dataNascimento;
     }
+    
 }

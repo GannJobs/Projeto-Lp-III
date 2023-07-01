@@ -58,7 +58,13 @@ public class Empregado extends Funcionario {
     }
 
     public Data getDataNascimento() {
-        return dataNascimento;
+        return super.dataNascimento;
     }
-
+    @Override
+    public String getCargo() {
+        return super.getCargo();
+    }
+    public String getData() {
+        return super.getdata();
+    }
 }

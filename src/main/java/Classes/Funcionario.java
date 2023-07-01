@@ -104,6 +104,9 @@ public class Funcionario extends Pessoa {
         return dataAdmissao;
     }
 
+    public String getdata(){
+        return super.getData();
+    }
     /**
      * @param dataAdmissao the dataAdmissao to set
      */

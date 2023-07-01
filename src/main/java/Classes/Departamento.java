@@ -1,7 +1,12 @@
 package Classes;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import ClassesAux.Data;
 
 public class Departamento {
 
@@ -133,5 +138,91 @@ public class Departamento {
         System.out.println("Aumento aplicado para o empregado " + empregado.getNome());
         System.out.println("Salário anterior: R$" + salarioAtual);
         System.out.println("Novo salário: R$" + novoSalario);
+    }
+
+    public void carregaEmpregado(String arquivo) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(arquivo))) {
+            String linha;
+            while ((linha = reader.readLine()) != null) {
+                String[] dados = linha.split(",");
+                String nome = dados[0].trim();
+                int idade = Integer.parseInt(dados[1].trim());
+                String telefone = dados[2].trim();
+                String cpf = dados[3].trim();
+                String email = dados[4].trim();
+                Data dataNascimento = parseData(dados[5].trim());
+                Data dataAdmissao = parseData(dados[6].trim());
+                String cargo = dados[7].trim();
+                String departamento = dados[8].trim();
+
+                Empregado empregado = new Empregado(nome, idade, telefone, email, cpf, dataNascimento, dataAdmissao, cargo, departamento);
+                adicionarEmpregado(empregado);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void carregaEstagiario(String arquivo) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(arquivo))) {
+            String linha;
+            while ((linha = reader.readLine()) != null) {
+                String[] dados = linha.split(",");
+                String nome = dados[0].trim();
+                int idade = Integer.parseInt(dados[1].trim());
+                String telefone = dados[2].trim();
+                String cpf = dados[3].trim();
+                String email = dados[4].trim();
+                Data dataNascimento = parseData(dados[5].trim());
+                Data dataAdmissao = parseData(dados[6].trim());
+                String cargo = dados[7].trim();
+                int duracao = Integer.parseInt(dados[8].trim());
+                String departamento = dados[9].trim();
+
+                Estagiario estagiario = new Estagiario(nome, idade, telefone, email, cpf, dataNascimento, dataAdmissao, cargo, duracao, departamento);
+                adicionarEstagiario(estagiario);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Data parseData(String dataStr) {
+        String[] partes = dataStr.split(":");
+        int dia = Integer.parseInt(partes[0]);
+        int mes = Integer.parseInt(partes[1]);
+        int ano = Integer.parseInt(partes[2]);
+        return new Data(dia, mes, ano);
+    }
+
+    public String toEstringEmpregado(Empregado empregado) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Nome: ").append(empregado.getNome()).append("\n");
+        stringBuilder.append("Idade: ").append(empregado.getIdade()).append("\n");
+        stringBuilder.append("Telefone: ").append(empregado.getTelefone()).append("\n");
+        stringBuilder.append("Email: ").append(empregado.getEmail()).append("\n");
+        stringBuilder.append("CPF: ").append(empregado.getCPF()).append("\n");
+        stringBuilder.append("Data de Nascimento: ").append(empregado.getDataNascimento()).append("\n");
+        stringBuilder.append("Data de Admissão: ").append(empregado.getDataAdmissao()).append("\n");
+        stringBuilder.append("Cargo: ").append(empregado.getCargo()).append("\n");
+        stringBuilder.append("Departamento: ").append(empregado.getDepartamento()).append("\n");
+
+        return stringBuilder.toString();
+    }
+
+    public String toEstringEstagiario(Estagiario estagiario) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Nome: ").append(estagiario.getNome()).append("\n");
+        stringBuilder.append("Idade: ").append(estagiario.getIdade()).append("\n");
+        stringBuilder.append("Telefone: ").append(estagiario.getTelefone()).append("\n");
+        stringBuilder.append("Email: ").append(estagiario.getEmail()).append("\n");
+        stringBuilder.append("CPF: ").append(estagiario.getCPF()).append("\n");
+        stringBuilder.append("Data de Nascimento: ").append(estagiario.getDataNascimento()).append("\n");
+        stringBuilder.append("Data de Admissão: ").append(estagiario.getDataAdmissao()).append("\n");
+        stringBuilder.append("Cargo: ").append(estagiario.getCargo()).append("\n");
+        stringBuilder.append("Tempo de Estagio: ").append(estagiario.getDuracaoEstagio()).append("\n");
+        stringBuilder.append("Departamento: ").append(estagiario.getDepartamento()).append("\n");
+
+        return stringBuilder.toString();
     }
 }
