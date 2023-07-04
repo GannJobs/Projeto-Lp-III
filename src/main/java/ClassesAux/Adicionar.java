@@ -1,13 +1,19 @@
-package Classes;
+package ClassesAux;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import Classes.Diretor;
+import Classes.Empregado;
+import Classes.Estagiario;
+import Classes.Gerente;
 
 
 public class Adicionar {
     public static boolean adicionarEstagiario(Estagiario estagiario, String arquivo) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivo, true))) {
-            String linha = estagiario.getNome() + "," +
+            String linha = estagiario.getCodigo()+ ","+
+                            estagiario.getNome() + "," +
                            estagiario.getSenha() + "," +
                            estagiario.getIdade() + "," +
                            estagiario.getTelefone() + "," +
@@ -35,7 +41,8 @@ public class Adicionar {
 
     public static boolean adicionarEmpregado(Empregado empregado, String arquivo) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivo, true))) {
-            String linha = empregado.getNome() + "," +
+            String linha = empregado.getCodigo()+ ","+
+                            empregado.getNome() + "," +
                            empregado.getSenha() + "," +
                            empregado.getIdade() + "," +
                            empregado.getTelefone() + "," +
@@ -62,7 +69,8 @@ public class Adicionar {
 
      public static boolean adicionarGerente(Gerente gerente, String arquivo) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivo, true))) {
-            String linha = gerente.getNome() + "," +
+            String linha = gerente.getCodigo()+ ","+
+                            gerente.getNome() + "," +
                            gerente.getSenha() + "," +
                            gerente.getIdade() + "," +
                            gerente.getTelefone() + "," +
@@ -89,7 +97,8 @@ public class Adicionar {
 
     public static boolean adicionarDiretor(Diretor diretor, String arquivo) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivo, true))) {
-            String linha = diretor.getNome() + "," +
+            String linha = diretor.getCodigo()+ ","+
+                            diretor.getNome() + "," +
                            diretor.getSenha() + "," +
                            diretor.getIdade() + "," +
                            diretor.getTelefone() + "," +

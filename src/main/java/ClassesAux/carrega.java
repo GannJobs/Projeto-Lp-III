@@ -1,4 +1,4 @@
-package Classes;
+package ClassesAux;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -6,7 +6,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ClassesAux.Data;
+import Classes.Diretor;
+import Classes.Empregado;
+import Classes.Estagiario;
+import Classes.Gerente;
 
 public class carrega {
     private static List<Empregado> empregados;
@@ -21,16 +24,16 @@ public class carrega {
             String linha;
             while ((linha = reader.readLine()) != null) {
                 String[] dados = linha.split(",");
-                String nome = dados[0].trim();
-                String senha = dados[1].trim();
-                int idade = Integer.parseInt(dados[2].trim());
-                String telefone = dados[3].trim();
-                String cpf = dados[4].trim();
-                String email = dados[5].trim();
-                Data dataNascimento = parseData(dados[6].trim());
-                Data dataAdmissao = parseData(dados[7].trim());
-                String cargo = dados[8].trim();
-                int departamento = Integer.parseInt(dados[9].trim());
+                String nome = dados[1].trim();
+                String senha = dados[2].trim();
+                int idade = Integer.parseInt(dados[3].trim());
+                String telefone = dados[4].trim();
+                String cpf = dados[5].trim();
+                String email = dados[6].trim();
+                Data dataNascimento = parseData(dados[7].trim());
+                Data dataAdmissao = parseData(dados[8].trim());
+                String cargo = dados[9].trim();
+                int departamento = Integer.parseInt(dados[10].trim());
 
                 Empregado empregado = new Empregado(nome, senha, idade, telefone, cpf, email, dataNascimento , dataAdmissao, cargo, departamento);
                 empregados.add(empregado);
@@ -49,17 +52,17 @@ public class carrega {
             String linha;
             while ((linha = reader.readLine()) != null) {
                 String[] dados = linha.split(",");
-                String nome = dados[0].trim();
-                String senha = dados[1].trim();
-                int idade = Integer.parseInt(dados[2].trim());
-                String telefone = dados[3].trim();
-                String cpf = dados[4].trim();
-                String email = dados[5].trim();
-                Data dataNascimento = parseData(dados[6].trim());
-                Data dataAdmissao = parseData(dados[7].trim());
-                String cargo = dados[8].trim();
-                int duracao = Integer.parseInt(dados[9].trim());
-                int departamento = Integer.parseInt(dados[10].trim());
+                String nome = dados[1].trim();
+                String senha = dados[2].trim();
+                int idade = Integer.parseInt(dados[3].trim());
+                String telefone = dados[4].trim();
+                String cpf = dados[5].trim();
+                String email = dados[6].trim();
+                Data dataNascimento = parseData(dados[7].trim());
+                Data dataAdmissao = parseData(dados[8].trim());
+                String cargo = dados[9].trim();
+                int duracao = Integer.parseInt(dados[10].trim());
+                int departamento = Integer.parseInt(dados[11].trim());
 
                 Estagiario estagiario = new Estagiario(nome, senha, idade, email, telefone, cpf, dataNascimento, dataAdmissao, cargo, duracao, departamento);
                 estagiarios.add(estagiario);
@@ -86,16 +89,16 @@ public class carrega {
         String linha;
         while ((linha = reader.readLine()) != null) {
             String[] dados = linha.split(",");
-            String nome = dados[0].trim();
-            String senha = dados[1].trim();
-            int idade = Integer.parseInt(dados[2].trim());
-            String telefone = dados[3].trim();
-            String cpf = dados[4].trim();
-            String email = dados[5].trim();
-            Data dataNascimento = parseData(dados[6].trim());
-            Data dataAdmissao = parseData(dados[7].trim());
-            String cargo = dados[8].trim();
-            int departamento = Integer.parseInt(dados[9].trim());
+            String nome = dados[1].trim();
+            String senha = dados[2].trim();
+            int idade = Integer.parseInt(dados[3].trim());
+            String telefone = dados[4].trim();
+            String cpf = dados[5].trim();
+            String email = dados[6].trim();
+            Data dataNascimento = parseData(dados[7].trim());
+            Data dataAdmissao = parseData(dados[8].trim());
+            String cargo = dados[9].trim();
+            int departamento = Integer.parseInt(dados[10].trim());
 
             Gerente gerente = new Gerente(nome, senha, idade, telefone, cpf, email, dataAdmissao, dataNascimento, cargo, departamento);
             gerentes.add(gerente);
@@ -114,15 +117,15 @@ public class carrega {
             String linha;
             while ((linha = reader.readLine()) != null) {
                 String[] dados = linha.split(",");
-                String nome = dados[0].trim();
-                String senha = dados[1].trim();
-                int idade = Integer.parseInt(dados[2].trim());
-                String telefone = dados[3].trim();
-                String cpf = dados[4].trim();
-                String email = dados[5].trim();
-                Data dataNascimento = parseData(dados[6].trim());
-                Data dataAdmissao = parseData(dados[7].trim());
-                String cargo = dados[8].trim();
+                String nome = dados[1].trim();
+                String senha = dados[2].trim();
+                int idade = Integer.parseInt(dados[3].trim());
+                String telefone = dados[4].trim();
+                String cpf = dados[5].trim();
+                String email = dados[6].trim();
+                Data dataNascimento = parseData(dados[7].trim());
+                Data dataAdmissao = parseData(dados[8].trim());
+                String cargo = dados[9].trim();
 
                 Diretor diretor = new Diretor(nome, senha, idade, telefone, cpf, email, dataAdmissao, dataNascimento, cargo);
                 diretores.add(diretor);
