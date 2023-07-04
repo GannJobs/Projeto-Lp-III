@@ -38,4 +38,8 @@ public abstract class Pessoa {
                 "\nData de Nascimento: " + dataNascimento.imprimirDataExtenso() 
                 + "\ntelefone: " + telefone + "\nemail: " + email + "\ncpf: " + cpf;
     }
+     
+    public String getData(){
+        return dataNascimento.imprimirDataExtenso();
+    }
 }

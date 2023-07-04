@@ -5,65 +5,73 @@ import ClassesAux.Data;
 
 
 
-public class Gerente extends Funcionario {
+public class Gerente extends Funcionario implements Pagamento{
 
-    private String departamento;
-    private final float salarioBaseGerente;
+    private int departamento;
+    private double salario = 2500.00;
+    private final double salarioBase = salario;
 
-    public Gerente(String nome, String email, int idade, String cpf, Data dataN, Data dataAdmissao, String cargo, String departamento) {
-        super(nome, email, idade, cpf, dataN, dataAdmissao, cargo);
+    public Gerente(String nome, String senha, int i, String string, String cpf, String string2, Data dataAdmissao, Data data, String cargo, int departamento) {
+        super(nome, senha, i, string,cpf, string2, dataAdmissao, data, cargo);
         this.departamento = departamento;
-        this.salarioBaseGerente = super.getSalarioBase() * 2.0f; // Salário base do gerente é 200% maior que o do funcionário
     }
-
-    public Gerente(String nome, int idade, String telefone, String cpf, Data dataN, Data dataAdmissao, String cargo, String departamento) {
-        super(nome, idade, telefone, cpf, dataN, dataAdmissao, cargo);
-        this.departamento = departamento;
-        this.salarioBaseGerente = super.getSalarioBase() * 2.0f; // Salário base do gerente é 200% maior que o do funcionário
-    }
-
-    public Gerente(String nome, int idade, String telefone, String email, String cpf, Data dataN, Data dataAdmissao, String cargo, String departamento) {
-        super(nome, idade, telefone, email, cpf, dataN, dataAdmissao, cargo);
-        this.departamento = departamento;
-        this.salarioBaseGerente = super.getSalarioBase() * 2.0f; // Salário base do gerente é 200% maior que o do funcionário
-    }
-
-    public void realizarPlanejamento() {
-        System.out.println("Realizando o planejamento do departamento: " + departamento);
-    }
-
-    public void gerenciarEquipe() {
-        System.out.println("Gerenciando a equipe do departamento: " + departamento);
-    }
-
-    public void promoverFuncionario(Funcionario funcionario) {
-        if (funcionario instanceof Gerente) {
-            System.out.println("Não é possível promover um gerente.");
-            return;
-        }
-
-        // Atualiza o cargo do funcionário para "Gerente"
-        funcionario.setCargo("Gerente");
-
-        // Calcula o novo salário base do funcionário promovido
-        float novoSalarioBase = getSalarioBase() * 1.5f;
-
-        // Atualiza o salário base do funcionário promovido
-        funcionario.setSalarioBase(novoSalarioBase);
-
-        System.out.println("Funcionário " + funcionario.getNome() + " promovido para o cargo de Gerente.");
-        System.out.println("Novo salário base: " + novoSalarioBase);
-    }
-
+    
     @Override
-    public double calcularSalarioLiquido() {
-        double salarioBruto = salarioBaseGerente;
-        double salarioLiquido = salarioBruto - (salarioBruto * 0.1) - (salarioBruto * 0.05);
-        return salarioLiquido;
+    public boolean Aumento(double valor){
+        if(valor > (salarioBase + salarioBase*0.3)){
+            return false;
+        }else if(valor < (salarioBase + salarioBase*0.3) && valor > salarioBase){
+            this.salario = valor;
+            return true;
+        }
+        return false;
+    }
+    
+    @Override
+    public boolean Desconto(double valor){
+        if(valor < (salarioBase - salarioBase*0.3)){
+            return false;
+        }else if(valor < salarioBase && valor > (salarioBase - salarioBase*0.3)){
+            this.salario = valor;
+            return true;
+        } 
+        return false;
+    }
+    
+    public int getDepartamento(){
+        return departamento;
+    }
+    
+    public void setDepartamento(int nDep){
+        this.departamento = nDep;
+    }
+    
+    public double getSalario(){
+        return salario;
     }
 
     @Override
     public String toString() {
-        return super.toString() + "\nDepartamento: " + departamento + "\nSalário Base Gerente: " + salarioBaseGerente;
+        return super.toString() + "\nDepartamento: " + departamento + "\nSalário Gerente: " + salario;
+    }
+    
+        public void promoverEstagiarioParaEmpregado(Estagiario estagiario, Departamento departamento) {
+        Empregado empregadoPromovido = new Empregado(
+            estagiario.getNome(),
+            estagiario.getSenha(),
+            estagiario.getIdade(),
+            estagiario.getTelefone(),
+            estagiario.getEmail(),
+            estagiario.getCPF(),
+            estagiario.getDataNascimento(),
+            estagiario.getDataAdmissao(),
+            estagiario.getCargo(),
+            estagiario.getDepartamento()
+        );
+        
+        //apagar estagiario
+
+        System.out.println("Estagiário " + estagiario.getNome() + " promovido para o cargo de Empregado.");
+        System.out.println("Novo salário base: " + empregadoPromovido.getSalario());
     }
 }
