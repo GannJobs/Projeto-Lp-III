@@ -32,7 +32,7 @@ public class carrega {
                 String cargo = dados[8].trim();
                 int departamento = Integer.parseInt(dados[9].trim());
 
-                Empregado empregado = new Empregado(nome, senha, idade, telefone, email, cpf, dataNascimento, dataAdmissao, cargo, departamento);
+                Empregado empregado = new Empregado(nome, senha, idade, telefone, cpf, email, dataNascimento , dataAdmissao, cargo, departamento);
                 empregados.add(empregado);
             }
         } catch (IOException e) {
@@ -61,7 +61,7 @@ public class carrega {
                 int duracao = Integer.parseInt(dados[9].trim());
                 int departamento = Integer.parseInt(dados[10].trim());
 
-                Estagiario estagiario = new Estagiario(nome, senha, idade, telefone, email, cpf, dataNascimento, dataAdmissao, cargo, duracao, departamento);
+                Estagiario estagiario = new Estagiario(nome, senha, idade, email, telefone, cpf, dataNascimento, dataAdmissao, cargo, duracao, departamento);
                 estagiarios.add(estagiario);
             }
         } catch (IOException e) {

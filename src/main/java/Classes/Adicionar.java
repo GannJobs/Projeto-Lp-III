@@ -3,6 +3,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+
 public class Adicionar {
     public static boolean adicionarEstagiario(Estagiario estagiario, String arquivo) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivo, true))) {
@@ -101,6 +102,7 @@ public class Adicionar {
                            diretor.getDataAdmissao().getMes() + "/" +
                            diretor.getDataAdmissao().getAno() + "," +
                            diretor.getCargo();
+                           
 
             writer.write(linha);
             writer.newLine();

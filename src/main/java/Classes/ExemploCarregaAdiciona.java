@@ -14,10 +14,12 @@ public class ExemploCarregaAdiciona {
                 "fulano@gmail.com", new Data(12, 6, 1995), new Data(1, 1, 2022), "Analista", 2);
         Estagiario estagiario = new Estagiario("Beltrano", "senha456", 22, "22222222", "98765432109",
                 "beltrano@gmail.com", new Data(3, 4, 2001), new Data(1, 1, 2023), "Estagiário", 1, 3);
-
+       
         // Adicionando objetos ao arquivo
         boolean adicionouEmpregado = Adicionar.adicionarEmpregado(empregado, arquivoEmpregado);
+        
         boolean adicionouEstagiario = Adicionar.adicionarEstagiario(estagiario, arquivoEstagiario);
+        
 
         // Verificando se a adição foi bem-sucedida
         if (adicionouEmpregado && adicionouEstagiario) {
@@ -32,13 +34,19 @@ public class ExemploCarregaAdiciona {
 
         // Exibindo os objetos carregados
         System.out.println("Empregados:");
-        for (Empregado e : empregados) {
-            System.out.println(e.getNome() + " - " + e.getCargo());
+        for (Empregado est : empregados) {
+             System.out.println(est.getNome() + " - cargo: " + est.getCargo()+ "- CPF: "+ est.getCPF() + " - telefone: " + est.getTelefone()
+            +" - idade: " + est.getIdade()+ "- DataAdimicao: "+ est.getDataAdmissao().getDia()+":" + est.getDataAdmissao().getMes()+":" +
+            est.getDataAdmissao().getAno()+":" + "- DataNascimento: "+ est.getDataNascimento().getDia()+":" + est.getDataNascimento().getMes()+":" +
+            est.getDataNascimento().getAno() );
         }
 
         System.out.println("Estagiários:");
         for (Estagiario est : estagiarios) {
-            System.out.println(est.getNome() + " - " + est.getCargo());
+            System.out.println(est.getNome() + " - cargo: " + est.getCargo()+ "- CPF: "+ est.getCPF() + " - telefone: " + est.getTelefone()
+            +" - idade: " + est.getIdade()+ "- DataAdimicao: "+ est.getDataAdmissao().getDia()+":" + est.getDataAdmissao().getMes()+":" +
+            est.getDataAdmissao().getAno()+":" + "- DataNascimento: "+ est.getDataNascimento().getDia()+":" + est.getDataNascimento().getMes()+":" +
+            est.getDataNascimento().getAno() );
         }
     }
 }

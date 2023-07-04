@@ -13,7 +13,7 @@ public class Funcionario extends Pessoa{
     private Data dataAdmissao;
     private String cargo;
 
-    public Funcionario(String nome, String senha, int idade, String telefone, String email, String cpf, Data dataAdmissao, Data data, String cargo) {
+    public Funcionario(String nome, String senha, int idade, String telefone, String email, String cpf, Data data, Data dataAdmissao, String cargo) {
         super(nome, idade, telefone, email, cpf, data);
         Nfuncionarios++;
         this.codigo = Nfuncionarios;
