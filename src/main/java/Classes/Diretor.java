@@ -29,6 +29,7 @@ public class Diretor extends Funcionario{
 
         System.out.println("Estagiário " + estagiario.getNome() + " promovido para o cargo de Empregado.");
         System.out.println("Novo salário base: " + empregadoPromovido.getSalario());
+        System.out.println("\n---- Lista de Estagiários ----");
     }
 
     public void promoverEmpregadoParaGerente(Empregado empregado, Departamento departamento) {
