@@ -2,68 +2,61 @@ package Classes;
 
 
 import ClassesAux.Data;
+import java.util.List;
 
+public class Gerente extends Funcionario{
 
+    private int departamento;
+    private double salario = 2500.00;
+    private final double salarioBase = salario;
 
-public class Gerente extends Funcionario {
-
-    private String departamento;
-    private final float salarioBaseGerente;
-
-    public Gerente(String nome, String email, int idade, String cpf, Data dataN, Data dataAdmissao, String cargo, String departamento) {
-        super(nome, email, idade, cpf, dataN, dataAdmissao, cargo);
+    public Gerente(String nome, String senha, int i, String telefone, String email, String cpf, Data dataAdmissao, Data data, String cargo, int departamento) {
+        super(nome, senha, i, telefone,email, cpf, dataAdmissao, data, cargo);
         this.departamento = departamento;
-        this.salarioBaseGerente = super.getSalarioBase() * 2.0f; // Salário base do gerente é 200% maior que o do funcionário
     }
-
-    public Gerente(String nome, int idade, String telefone, String cpf, Data dataN, Data dataAdmissao, String cargo, String departamento) {
-        super(nome, idade, telefone, cpf, dataN, dataAdmissao, cargo);
-        this.departamento = departamento;
-        this.salarioBaseGerente = super.getSalarioBase() * 2.0f; // Salário base do gerente é 200% maior que o do funcionário
+    
+    public Gerente(Gerente gerente, Departamento dep){
+        super(gerente.getNome(), gerente.getSenha(), gerente.getIdade(), gerente.getTelefone(),gerente.getEmail(), gerente.getCPF(), Data.getDataAtual(), gerente.getDataN(), gerente.getCargo());
+        this.departamento = dep.getCodigo();
     }
-
-    public Gerente(String nome, int idade, String telefone, String email, String cpf, Data dataN, Data dataAdmissao, String cargo, String departamento) {
-        super(nome, idade, telefone, email, cpf, dataN, dataAdmissao, cargo);
-        this.departamento = departamento;
-        this.salarioBaseGerente = super.getSalarioBase() * 2.0f; // Salário base do gerente é 200% maior que o do funcionário
+    
+    public Gerente(Gerente gerente){
+        super(gerente.getNome(), gerente.getSenha(), gerente.getIdade(), gerente.getTelefone(),gerente.getEmail(), gerente.getCPF(), gerente.getDataAdmissao(), gerente.getDataN(), gerente.getCargo());
+        this.departamento =  gerente.getDepartamento();
     }
-
-    public void realizarPlanejamento() {
-        System.out.println("Realizando o planejamento do departamento: " + departamento);
-    }
-
-    public void gerenciarEquipe() {
-        System.out.println("Gerenciando a equipe do departamento: " + departamento);
-    }
-
-    public void promoverFuncionario(Funcionario funcionario) {
-        if (funcionario instanceof Gerente) {
-            System.out.println("Não é possível promover um gerente.");
-            return;
+    
+    public static  Gerente buscarNome(List<Gerente> listaGerentes, String nome) {
+        for (Gerente gerente : listaGerentes) {
+            if (gerente.getNome().equals(nome)) {
+                return gerente; // Retorna o gerente encontrado
+            }
         }
-
-        // Atualiza o cargo do funcionário para "Gerente"
-        funcionario.setCargo("Gerente");
-
-        // Calcula o novo salário base do funcionário promovido
-        float novoSalarioBase = getSalarioBase() * 1.5f;
-
-        // Atualiza o salário base do funcionário promovido
-        funcionario.setSalarioBase(novoSalarioBase);
-
-        System.out.println("Funcionário " + funcionario.getNome() + " promovido para o cargo de Gerente.");
-        System.out.println("Novo salário base: " + novoSalarioBase);
+    return null;
     }
-
-    @Override
-    public double calcularSalarioLiquido() {
-        double salarioBruto = salarioBaseGerente;
-        double salarioLiquido = salarioBruto - (salarioBruto * 0.1) - (salarioBruto * 0.05);
-        return salarioLiquido;
+    
+    public static  Gerente buscarCod(List<Gerente> listaGerentes, int cod) {
+        for (Gerente gerente : listaGerentes) {
+            if (gerente.getCodigo()== cod) {
+                return gerente; // Retorna o gerente encontrado
+            }
+        }
+    return null;
+    }
+    
+    public int getDepartamento(){
+        return departamento;
+    }
+    
+    public void setDepartamento(int nDep){
+        this.departamento = nDep;
+    }
+    
+    public double getSalario(){
+        return salario;
     }
 
     @Override
     public String toString() {
-        return super.toString() + "\nDepartamento: " + departamento + "\nSalário Base Gerente: " + salarioBaseGerente;
+        return super.toString() + "\nDepartamento: " + departamento + "\nSalário Gerente: " + salario;
     }
 }

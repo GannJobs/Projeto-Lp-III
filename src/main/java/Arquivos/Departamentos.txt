@@ -1,0 +1,4 @@
+,Assessoria,2
+,Vendas,3
+,TI,4
+,Logistica,5

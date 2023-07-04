@@ -2,43 +2,35 @@ package Classes;
 
 
 import ClassesAux.Data;
+import java.util.List;
 
-public class Diretor extends Funcionario {
-    private String setor;
-    private double salarioBaseDiretor;
+public class Diretor extends Funcionario{
+   // private String setor;
+    private double salarioDiretor = 5000.00;
 
-    public Diretor(String nome, int idade, String telefone, String email, String cpf, Data dataN, Data dataAdmissao, String cargo, String setor) {
-        super(nome, idade, telefone, email, cpf, dataN, dataAdmissao, cargo);
-        this.setor = setor;
-        this.salarioBaseDiretor = super.getSalarioBase() * 4.0; // o salario vai ser 4 vezes o salario base
-
+    public Diretor(String nome, String senha, int i, String string, String cpf, String string2, Data dataAdmissao, Data data, String cargo) {
+        super( nome, senha, i, string,cpf, string2, dataAdmissao, data, cargo);
     }
-
-    public String getSetor() {
-        return setor;
+    
+    public Diretor(Diretor diretor) {
+        super(diretor.getNome(), diretor.getSenha(), diretor.getIdade(), diretor.getTelefone(),diretor.getEmail(), diretor.getCPF(), diretor.getDataAdmissao(), diretor.getDataN(), "Diretor");
     }
-
-    public void setSetor(String setor) {
-        this.setor = setor;
-    }
-
+    
     public double getSalarioBaseDiretor() {
-        return salarioBaseDiretor;
+        return salarioDiretor;
     }
-
-    public void setSalarioBaseDiretor(double salarioBaseDiretor) {
-        this.salarioBaseDiretor = salarioBaseDiretor;
+    
+    public static Diretor buscarNome(List<Diretor> listaDiretor, String nome) {
+        for (Diretor diretor : listaDiretor) {
+            if (diretor.getNome().equals(nome)) {
+                return diretor; // Retorna o estagiario encontrado
+            }
+        }
+    return null;
     }
-
-    @Override
-    public double calcularSalarioLiquido() {
-        double salarioBruto = salarioBaseDiretor;
-        double salarioLiquido = salarioBruto - (salarioBruto * 0.1) - (salarioBruto * 0.05);
-        return salarioLiquido;
-    }
-
+    
     @Override
     public String toString() {
-        return super.toString() + "\nSetor: " + setor + "\nSalário Base Diretor: " + salarioBaseDiretor;
+        return super.toString() + "\nSalário Base Diretor: " + salarioDiretor;
     }
 }
