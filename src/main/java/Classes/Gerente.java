@@ -74,4 +74,21 @@ public class Gerente extends Funcionario implements Pagamento{
         System.out.println("Estagiário " + estagiario.getNome() + " promovido para o cargo de Empregado.");
         System.out.println("Novo salário base: " + empregadoPromovido.getSalario());
     }
+
+     public int getIdade(){
+        return idade;
+    } 
+    public String getTelefone(){
+        return telefone;
+    }
+     public String getCPF(){
+        return cpf;
+    }
+     public String getEmail(){
+        return email;
+    }
+
+    public Data getDataNascimento(){
+        return dataNascimento;
+    }
 }

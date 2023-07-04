@@ -62,4 +62,35 @@ public class Diretor extends Funcionario{
     public String toString() {
         return super.toString() + "\nSalário Base Diretor: " + salarioDiretor;
     }
+
+    /**
+     * @return double return the salarioDiretor
+     */
+    public double getSalarioDiretor() {
+        return salarioDiretor;
+    }
+
+    /**
+     * @param salarioDiretor the salarioDiretor to set
+     */
+    public void setSalarioDiretor(double salarioDiretor) {
+        this.salarioDiretor = salarioDiretor;
+    }
+
+    public int getIdade(){
+        return idade;
+    } 
+    public String getTelefone(){
+        return telefone;
+    }
+     public String getCPF(){
+        return cpf;
+    }
+     public String getEmail(){
+        return email;
+    }
+
+    public Data getDataNascimento(){
+        return dataNascimento;
+    }
 }

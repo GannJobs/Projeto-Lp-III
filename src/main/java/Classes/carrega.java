@@ -41,7 +41,7 @@ public class carrega {
 
         return empregados;
     }
-    
+
      public static List<Estagiario> carregaEstagiario(String arquivo) {
         estagiarios = new ArrayList<>();
 
@@ -79,4 +79,59 @@ public class carrega {
         return new Data(dia, mes, ano);
     }
     
+    public static List<Gerente> carregaGerente(String arquivo) {
+    List<Gerente> gerentes = new ArrayList<>();
+
+    try (BufferedReader reader = new BufferedReader(new FileReader(arquivo))) {
+        String linha;
+        while ((linha = reader.readLine()) != null) {
+            String[] dados = linha.split(",");
+            String nome = dados[0].trim();
+            String senha = dados[1].trim();
+            int idade = Integer.parseInt(dados[2].trim());
+            String telefone = dados[3].trim();
+            String cpf = dados[4].trim();
+            String email = dados[5].trim();
+            Data dataNascimento = parseData(dados[6].trim());
+            Data dataAdmissao = parseData(dados[7].trim());
+            String cargo = dados[8].trim();
+            int departamento = Integer.parseInt(dados[9].trim());
+
+            Gerente gerente = new Gerente(nome, senha, idade, telefone, cpf, email, dataAdmissao, dataNascimento, cargo, departamento);
+            gerentes.add(gerente);
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+
+    return gerentes;
+    }
+
+     public static List<Diretor> carregaDiretor(String arquivo) {
+        List<Diretor> diretores = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(arquivo))) {
+            String linha;
+            while ((linha = reader.readLine()) != null) {
+                String[] dados = linha.split(",");
+                String nome = dados[0].trim();
+                String senha = dados[1].trim();
+                int idade = Integer.parseInt(dados[2].trim());
+                String telefone = dados[3].trim();
+                String cpf = dados[4].trim();
+                String email = dados[5].trim();
+                Data dataNascimento = parseData(dados[6].trim());
+                Data dataAdmissao = parseData(dados[7].trim());
+                String cargo = dados[8].trim();
+
+                Diretor diretor = new Diretor(nome, senha, idade, telefone, cpf, email, dataAdmissao, dataNascimento, cargo);
+                diretores.add(diretor);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return diretores;
+    }
+
 }
