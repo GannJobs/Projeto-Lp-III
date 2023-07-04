@@ -31,11 +31,39 @@ public abstract class Pessoa {
         this.cpf = cpf;
         this.dataNascimento = dataN;
     }
+
+    public Data getDataN(){
+        return dataNascimento;
+    }
+    
+    public String getNome(){
+        return nome;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+     public String getEmail() {
+        return email;
+    }
+
+     public String getCPF() {
+        return cpf;
+    }
     
     @Override
     public String toString(){
         return "nome: " + nome + "\nidade: " + idade + 
                 "\nData de Nascimento: " + dataNascimento.imprimirDataExtenso() 
                 + "\ntelefone: " + telefone + "\nemail: " + email + "\ncpf: " + cpf;
+    }
+     
+    public String getData(){
+        return dataNascimento.imprimirDataExtenso();
     }
 }

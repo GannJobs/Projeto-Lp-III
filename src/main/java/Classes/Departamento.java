@@ -1,18 +1,36 @@
 package Classes;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+
+import ClassesAux.Data;
 
 public class Departamento {
-    private String nome;
-    private String codigo;
-    private Gerente gerenteResponsavel;
-    private ArrayList<Funcionario> funcionarios;
 
-    public Departamento(String nome, String codigo, Gerente gerenteResponsavel) {
+    private String nome;
+    private int codigo;
+    public static int NDeps = 0;
+    private int gerenteResponsavel;
+
+    public Departamento(String nome, int gerenteResponsavel) {
+        NDeps++;
         this.nome = nome;
-        this.codigo = codigo;
+        this.codigo = NDeps;
         this.gerenteResponsavel = gerenteResponsavel;
-        this.funcionarios = new ArrayList<>();
+    }
+    
+    public Departamento(Departamento dep) {
+        NDeps++;
+        this.nome = dep.getNome();
+        this.codigo = NDeps;
+        this.gerenteResponsavel = dep.getGerenteResponsavel();
+    }
+    
+    public int getCodigo(){
+        return codigo;
     }
 
     public String getNome() {
@@ -23,65 +41,20 @@ public class Departamento {
         this.nome = nome;
     }
 
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
-    public Gerente getGerenteResponsavel() {
+    public int getGerenteResponsavel() {
         return gerenteResponsavel;
     }
 
-    public void setGerenteResponsavel(Gerente gerenteResponsavel) {
+    public void setGerenteResponsavel(int gerenteResponsavel) {
         this.gerenteResponsavel = gerenteResponsavel;
     }
-
-    public ArrayList<Funcionario> getFuncionarios() {
-        return funcionarios;
-    }
-
-    public void setFuncionarios(ArrayList<Funcionario> funcionarios) {
-        this.funcionarios = funcionarios;
-    }
-
-    public void adicionarFuncionario(Funcionario funcionario) {
-        funcionarios.add(funcionario);
-    }
-
-    public void removerFuncionario(Funcionario funcionario) {
-        funcionarios.remove(funcionario);
-    }
-
-    public ArrayList<Funcionario> listarFuncionarios() {
-        return funcionarios;
-    }
-
-    public double calcularMediaSalarial() {
-        double totalSalarios = 0;
-        for (Funcionario funcionario : funcionarios) {
-            totalSalarios += funcionario.getSalarioBase();
-        }
-        if (!funcionarios.isEmpty()) {
-            return totalSalarios / funcionarios.size();
-        } else {
-            return 0;
+    
+    public static Departamento buscarDepartamentoPorCodigo(List<Departamento> listaDepartamentos, int codigoBusca) {
+    for (Departamento departamento : listaDepartamentos) {
+        if (departamento.getCodigo() == codigoBusca) {
+            return departamento; // Retorna o departamento encontrado
         }
     }
-
-    //vai receber o funcionario que vai receber o aumento
-    //e qual vai ser a porcentagem de aumento a ser recebido
-    public void darAumento(Funcionario funcionario, double aumentoPercentual) {
-        double salarioAtual = funcionario.getSalarioBase();
-        double aumentoValor = salarioAtual * (aumentoPercentual / 100);
-        double novoSalario = salarioAtual + aumentoValor;
-        
-        funcionario.setSalarioBase((float)novoSalario);
-        System.out.println("Aumento aplicado para o funcionário " + funcionario.getNome());
-        System.out.println("Salário anterior: R$" + salarioAtual);
-        System.out.println("Novo salário: R$" + novoSalario);
-    }
-
+    return null; // Retorna null se nenhum departamento for encontrado
+}
 }
