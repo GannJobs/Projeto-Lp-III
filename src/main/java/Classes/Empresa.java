@@ -29,16 +29,6 @@ public class Empresa {
         return departamentos;
     }
 
-    public double calcularFolhaPagamento() {
-        double folhaPagamento = 0;
-        for (Departamento departamento : departamentos) {
-            for (Funcionario funcionario : departamento.listarFuncionarios()) {
-                folhaPagamento += funcionario.getSalarioBase();
-            }
-        }
-        return folhaPagamento;
-    }
-
     public Diretor getDiretor() {
         return diretor;
     }

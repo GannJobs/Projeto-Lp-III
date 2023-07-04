@@ -3,42 +3,62 @@ package Classes;
 
 import ClassesAux.Data;
 
-public class Diretor extends Funcionario {
-    private String setor;
-    private double salarioBaseDiretor;
+public class Diretor extends Funcionario{
+   // private String setor;
+    private double salarioDiretor = 5000.00;
 
-    public Diretor(String nome, int idade, String telefone, String email, String cpf, Data dataN, Data dataAdmissao, String cargo, String setor) {
-        super(nome, idade, telefone, email, cpf, dataN, dataAdmissao, cargo);
-        this.setor = setor;
-        this.salarioBaseDiretor = super.getSalarioBase() * 4.0; // o salario vai ser 4 vezes o salario base
-
+    public Diretor(String nome, String senha, int i, String string, String cpf, String string2, Data dataAdmissao, Data data, String cargo) {
+        super( nome, senha, i, string,cpf, string2, dataAdmissao, data, cargo);
     }
 
-    public String getSetor() {
-        return setor;
+    public void promoverEstagiarioParaEmpregado(Estagiario estagiario, Departamento departamento) {
+        Empregado empregadoPromovido = new Empregado(
+            estagiario.getNome(),
+            estagiario.getSenha(),
+            estagiario.getIdade(),
+            estagiario.getTelefone(),
+            estagiario.getEmail(),
+            estagiario.getCPF(),
+            estagiario.getDataNascimento(),
+            estagiario.getDataAdmissao(),
+            estagiario.getCargo(),
+            estagiario.getDepartamento()
+        );
+        
+        //apagar estagiario
+
+        System.out.println("Estagiário " + estagiario.getNome() + " promovido para o cargo de Empregado.");
+        System.out.println("Novo salário base: " + empregadoPromovido.getSalario());
     }
 
-    public void setSetor(String setor) {
-        this.setor = setor;
-    }
+    public void promoverEmpregadoParaGerente(Empregado empregado, Departamento departamento) {
+        Gerente gerentePromovido = new Gerente(
+            empregado.getNome(),
+            empregado.getSenha(),
+            empregado.getIdade(),
+            empregado.getTelefone(),
+            empregado.getEmail(),
+            empregado.getCPF(),
+            empregado.getDataNascimento(),
+            empregado.getDataAdmissao(),
+            empregado.getCargo(),
+            empregado.getDepartamento()
+        );
+        
+        //apagar empregado
 
+        departamento.setGerenteResponsavel(gerentePromovido);
+
+        System.out.println("Empregado " + empregado.getNome() + " promovido para o cargo de Gerente.");
+        System.out.println("Novo salário base: " + gerentePromovido.getSalario());
+    }
+    
     public double getSalarioBaseDiretor() {
-        return salarioBaseDiretor;
+        return salarioDiretor;
     }
-
-    public void setSalarioBaseDiretor(double salarioBaseDiretor) {
-        this.salarioBaseDiretor = salarioBaseDiretor;
-    }
-
-    @Override
-    public double calcularSalarioLiquido() {
-        double salarioBruto = salarioBaseDiretor;
-        double salarioLiquido = salarioBruto - (salarioBruto * 0.1) - (salarioBruto * 0.05);
-        return salarioLiquido;
-    }
-
+    
     @Override
     public String toString() {
-        return super.toString() + "\nSetor: " + setor + "\nSalário Base Diretor: " + salarioBaseDiretor;
+        return super.toString() + "\nSalário Base Diretor: " + salarioDiretor;
     }
 }

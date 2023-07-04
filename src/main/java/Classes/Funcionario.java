@@ -5,50 +5,35 @@ import ClassesAux.Data;
 
 
 
-public class Funcionario extends Pessoa {
+public class Funcionario extends Pessoa{
 
     private int codigo;
-    private float salarioBase = 1200;
+    private String senha;
     public static int Nfuncionarios = 0;
     private Data dataAdmissao;
     private String cargo;
 
-    public Funcionario(String nome, String email, int idade, String cpf, Data dataN, Data dataAdmissao, String cargo) {
-        super(nome, email, idade, cpf, dataN);
+    public Funcionario(String nome, String senha, int idade, String telefone, String email, String cpf, Data dataAdmissao, Data data, String cargo) {
+        super(nome, idade, telefone, email, cpf, data);
         Nfuncionarios++;
         this.codigo = Nfuncionarios;
         this.dataAdmissao = dataAdmissao;
         this.cargo = cargo;
+        this.senha = senha;
     }
     
-    public Funcionario(String nome, int idade, String telefone, String cpf, Data dataN, Data dataAdmissao, String cargo) {
+    public Funcionario(String nome, String senha, int idade, String telefone, String cpf, Data dataN, Data dataAdmissao, String cargo) {
         super(nome, idade, telefone, cpf, dataN);
         Nfuncionarios++;
         this.codigo = Nfuncionarios;
         this.dataAdmissao = dataAdmissao;
         this.cargo = cargo;
-    }
-    
-    public Funcionario(String nome, int idade, String telefone, String email, String cpf, Data dataN, Data dataAdmissao, String cargo) {
-        super(nome, idade, telefone, email, cpf, dataN);
-        Nfuncionarios++;
-        this.codigo = Nfuncionarios;
-        this.dataAdmissao = dataAdmissao;
-        this.cargo = cargo;
+        this.senha = senha;
     }
  
     @Override
     public String toString() {
-        return super.toString() + "\nCargo: " + cargo + "\nCódigo: " + codigo + "\nSalário Base: " + salarioBase + "\n";
-    }
-
-
-    /*No calcularSalarioLiquido() método, assumi uma dedução fixa de 10% para impostos
-     e 5% para seguro saúde do salário base para calcular o salário líquido. */
-    public double calcularSalarioLiquido() {
-        double salarioBruto = salarioBase;
-        double salarioLiquido = salarioBruto - (salarioBruto * 0.1) - (salarioBruto * 0.05);
-        return salarioLiquido;
+        return super.toString() + "\nCargo: " + cargo;
     }
 
     /* calcula o tempo na empresa, a partir da admissão até a data atual */
@@ -71,23 +56,15 @@ public class Funcionario extends Pessoa {
     
         return anos;
     }
-    public void calculoSalarial(int horas) {
-
-        if (horas > 160) {
-            //a cada hora extra trabalhada vai receber 1% a mais do salario
-            System.out.println("O salário fica em R$" + (salarioBase + salarioBase * ((horas - 160)*0.01)));
-        } else if(horas < 160){
-            System.out.println("O salário fica em R$" + salarioBase * 0.8);
-        }else{
-            System.out.println("O salário fica em R$" + salarioBase);
-        }
-    }
-
     /**
      * @return int return the codigo
      */
     public int getCodigo() {
         return codigo;
+    }
+    
+    public String getSenha(){
+        return senha;
     }
 
     /**
@@ -104,6 +81,9 @@ public class Funcionario extends Pessoa {
         return dataAdmissao;
     }
 
+    public String getdata(){
+        return super.getData();
+    }
     /**
      * @param dataAdmissao the dataAdmissao to set
      */
@@ -125,16 +105,7 @@ public class Funcionario extends Pessoa {
         this.cargo = cargo;
     }
 
-    public float getSalarioBase() {
-        return salarioBase;
-    }
-
-    public void setSalarioBase(float novoSalario) {
-        this.salarioBase =  novoSalario;
-    }
-
     public String getNome() {
         return nome;
     }
-
 }
