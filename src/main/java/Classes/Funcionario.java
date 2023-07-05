@@ -13,7 +13,8 @@ public class Funcionario extends Pessoa{
     private Data dataAdmissao;
     private String cargo;
 
-    public Funcionario(String nome, String senha, int idade, String telefone, String email, String cpf, Data data, Data dataAdmissao, String cargo) {
+
+    public Funcionario(String nome, String senha, int idade, String telefone, String email, String cpf, Data dataAdmissao, Data data, String cargo) {
         super(nome, idade, telefone, email, cpf, data);
         Nfuncionarios++;
         this.codigo = Nfuncionarios;
@@ -56,9 +57,7 @@ public class Funcionario extends Pessoa{
     
         return anos;
     }
-    /**
-     * @return int return the codigo
-     */
+
     public int getCodigo() {
         return codigo;
     }
@@ -67,16 +66,10 @@ public class Funcionario extends Pessoa{
         return senha;
     }
 
-    /**
-     * @param codigo the codigo to set
-     */
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
 
-    /**
-     * @return Data return the dataAdmissao
-     */
     public Data getDataAdmissao() {
         return dataAdmissao;
     }
@@ -84,28 +77,20 @@ public class Funcionario extends Pessoa{
     public String getdata(){
         return super.getData();
     }
-    /**
-     * @param dataAdmissao the dataAdmissao to set
-     */
+
     public void setDataAdmissao(Data dataAdmissao) {
         this.dataAdmissao = dataAdmissao;
     }
+    
+    public String getAdmExtenso(){
+        return dataAdmissao.imprimirDataExtenso();
+    }
 
-    /**
-     * @return String return the cargo
-     */
     public String getCargo() {
         return cargo;
     }
 
-    /**
-     * @param cargo the cargo to set
-     */
     public void setCargo(String cargo) {
         this.cargo = cargo;
-    }
-
-    public String getNome() {
-        return nome;
     }
 }

@@ -1,6 +1,13 @@
 package Classes;
 
 import java.util.List;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import ClassesAux.Data;
 
 public class Departamento {
 
@@ -46,11 +53,11 @@ public class Departamento {
     }
     
     public static Departamento buscarDepartamentoPorCodigo(List<Departamento> listaDepartamentos, int codigoBusca) {
-    for (Departamento departamento : listaDepartamentos) {
-        if (departamento.getCodigo() == codigoBusca) {
-            return departamento; // Retorna o departamento encontrado
+        for (Departamento departamento : listaDepartamentos) {
+            if (departamento.getCodigo() == codigoBusca) {
+                return departamento; // Retorna o departamento encontrado
+            }
         }
-    }
     return null; // Retorna null se nenhum departamento for encontrado
-}
+    }
 }

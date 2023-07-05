@@ -2,9 +2,12 @@
 package Classes;
 
 import ClassesAux.Data;
+import java.util.List;
 
 public class Estagiario extends Funcionario implements Pagamento {
 
+
+public class Estagiario extends Funcionario implements Pagamento {
     private int duracaoEstagio;
     private int departamento;
     private double salario = 700.00;
@@ -22,6 +25,12 @@ public class Estagiario extends Funcionario implements Pagamento {
         this.duracaoEstagio = duracaoEstagio;
         this.departamento = departamento;
     }
+  
+    public Estagiario(Estagiario estagiario){
+        super(estagiario.getNome(), estagiario.getSenha(), estagiario.getIdade(),estagiario.getEmail(),estagiario.getTelefone(),estagiario.getCPF(),estagiario.getDataNascimento(),estagiario.getDataAdmissao(), estagiario.getCargo());
+        this.departamento = estagiario.getDepartamento();
+        this.duracaoEstagio = estagiario.getDuracaoEstagio();
+    }  
     
     @Override
     public boolean Aumento(double valor){
@@ -51,26 +60,58 @@ public class Estagiario extends Funcionario implements Pagamento {
     
     public void setFuncao(String nFuncao){
         this.funcao = nFuncao;
+    }   
+  
+    public static Estagiario buscarDepartamentoPorCodigo(List<Estagiario> listaEstagiarios, int codigoBusca) {
+        for (Estagiario estagiario : listaEstagiarios) {
+            if (estagiario.getCodigo() == codigoBusca) {
+                return estagiario; // Retorna o estagiario encontrado
+            }
+        }
+    return null;
     }
     
-    public int getIdade() {
-        return super.idade;
+    public static Estagiario buscarNome(List<Estagiario> listaEstagiarios, String nome) {
+        for (Estagiario estagiario : listaEstagiarios) {
+            if (estagiario.getNome() == nome) {
+                return estagiario; // Retorna o estagiario encontrado
+            }
+        }
+    return null;
     }
-
-    public String getTelefone() {
-        return super.telefone;
+    
+    @Override
+    public boolean Aumento(double valor){
+        if(valor > (salarioBase + salarioBase*0.3)){
+            return false;
+        }else if(valor < (salarioBase + salarioBase*0.3) && valor > salarioBase){
+            this.salario = valor;
+            return true;
+        }
+        return false;
     }
-
-     public String getEmail() {
-        return super.email;
+    
+    @Override
+    public boolean Desconto(double valor){
+        if(valor < (salarioBase - salarioBase*0.3)){
+            return false;
+        }else if(valor < salarioBase && valor > (salarioBase - salarioBase*0.3)){
+            this.salario = valor;
+            return true;
+        } 
+        return false;
     }
-
-     public String getCPF() {
-        return super.cpf;
+    
+    public double getSalario(){
+        return salario;
     }
-
+    
     public int getDuracaoEstagio() {
         return duracaoEstagio;
+    }
+    
+    public String getDuracaoEstagioStr(){
+        return Integer.toString(duracaoEstagio);
     }
 
     public void setDuracaoEstagio(int duracaoEstagio) {
@@ -84,10 +125,6 @@ public class Estagiario extends Funcionario implements Pagamento {
     public void setDepartamento(int departamento) {
         this.departamento = departamento;
     }
-     
-    public String getdatas(){
-        return super.getData();
-    }
 
     @Override
     public String toString() {
@@ -98,5 +135,8 @@ public class Estagiario extends Funcionario implements Pagamento {
      public Data getDataNascimento() {
         return dataNascimento;
     }
-    
+     
+     public String getDataNascimentoExtenso(){
+         return dataNascimento.imprimirDataExtenso();
+     }  
 }

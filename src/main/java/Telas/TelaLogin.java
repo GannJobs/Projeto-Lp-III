@@ -4,6 +4,20 @@
  */
 package Telas;
 
+import Classes.Departamento;
+import Classes.Diretor;
+import Classes.Empregado;
+import Classes.Estagiario;
+import Classes.Gerente;
+import ClassesAux.Data;
+import TelasDiretor.TelaInicialDiretor;
+import TelasEstagiario.TelaInicialEstagiario;
+import TelasMembro.TelaInicialMembro;
+import TelasGerente.TelaInicialGerente;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JTextField;
+
 /**
  *
  * @author Binho
@@ -13,6 +27,12 @@ public class TelaLogin extends javax.swing.JFrame {
     /**
      * Creates new form TelaLogin
      */
+    
+    List<Estagiario> listaEstagiarios = null;
+    List<Empregado> listaEmpregado = null;
+    List<Gerente> listaGerentes = null;
+    List<Diretor> listaDiretor = null;
+    
     public TelaLogin() {
         initComponents();
     }
@@ -34,6 +54,7 @@ public class TelaLogin extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tela Login");
@@ -44,6 +65,12 @@ public class TelaLogin extends javax.swing.JFrame {
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel2.setText("User:");
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Password:");
 
@@ -67,6 +94,9 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setText("LOGIN");
 
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText(".");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -74,16 +104,17 @@ public class TelaLogin extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(318, 318, 318)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(258, 258, 258)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField2)
                             .addComponent(jTextField1)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(318, 318, 318)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(294, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -101,7 +132,9 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(176, 176, 176))
+                .addGap(32, 32, 32)
+                .addComponent(jLabel4)
+                .addGap(128, 128, 128))
         );
 
         jDesktopPane1.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -137,7 +170,96 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        //leitura dos dados para ver se pode
+        /*
+        Estagiario estagiario = new Estagiario(Estagiario.buscarNome(listaEstagiarios, jTextField1.getText()));
+        Empregado empregado = new Empregado(Empregado.buscarNome(listaEmpregado, jTextField1.getText()));
+        Gerente gerente = new Gerente(Gerente.buscarNome(listaGerentes, jTextField1.getText()));
+        Diretor diretor = new Diretor(Diretor.buscarNome(listaDiretor, jTextField1.getText()));
+        //existindo entra na respectiva tela
+        if(estagiario != null){
+            if(estagiario.getSenha() == jTextField2.getText()){
+               TelaInicialEstagiario te = new TelaInicialEstagiario(estagiario);
+                te.setLocationRelativeTo(null);
+                te.setVisible(true);
+                this.dispose();  
+            }else{
+                jLabel4.setText("Senha Incorreta!");
+            }
+        } else if (empregado != null){
+            if(empregado.getSenha() == jTextField2.getText()){
+                TelaInicialMembro tm = new TelaInicialMembro(empregado);
+                tm.setLocationRelativeTo(null);
+                tm.setVisible(true);
+                this.dispose();
+            }else{
+                jLabel4.setText("Senha Incorreta!");
+            }
+        } else if (gerente != null){
+            if(gerente.getSenha() == jTextField2.getText()){
+                TelaInicialGerente tg = new TelaInicialGerente(gerente,new Departamento("vendas",gerente));
+                tg.setLocationRelativeTo(null);
+                tg.setVisible(true);
+                this.dispose();
+            }else{
+                jLabel4.setText("Senha Incorreta!");
+            }
+        } else if (diretor != null){
+            if(diretor.getSenha() == jTextField2.getText()){
+                TelaInicialDiretor telaInicialDiretor = new TelaInicialDiretor(diretor);
+                telaInicialDiretor.setLocationRelativeTo(null);
+                telaInicialDiretor.setVisible(true);
+                this.dispose();
+            }else{
+                jLabel4.setText("Senha Incorreta!");
+            }
+        }else{
+            jLabel4.setText("Usuário não encotrado!");
+        }
+        */
+        if (true){
+            int a = Integer.parseInt(jTextField1.getText());
+            switch(a){
+                case 1:
+                    //nome do objeto
+                    Diretor diretor = new Diretor("joabe", "123",20,"123123", "aa@aa.com", "4564654", Data.getDataAtual(), Data.getDataAtual(), "Diretor");
+                    TelaInicialDiretor telaInicialDiretor = new TelaInicialDiretor(diretor);
+                    telaInicialDiretor.setLocationRelativeTo(null);
+                    telaInicialDiretor.setVisible(true);
+                    this.dispose();
+                break;
+                case 2:
+                    //nome do objetos
+                    Estagiario bia = new Estagiario("Ana Beatriz", "123", 18, "Bia@bia.com", "78 87978-8781", "000.000.000-10", Data.getDataAtual(), Data.getDataAtual(), "Estagiária", 8, 1);
+                    TelaInicialEstagiario te = new TelaInicialEstagiario(bia);
+                    te.setLocationRelativeTo(null);
+                    te.setVisible(true);
+                    this.dispose();
+                break;
+                case 3:
+                    //nome do objeto
+                    Empregado maykon = new Empregado("maykon S.", "123", 18, "M@M.com", "78 87978-8781", "000.000.000-10", Data.getDataAtual(), Data.getDataAtual(), "Empregado", 1);
+                    TelaInicialMembro tm = new TelaInicialMembro(maykon);
+                    tm.setLocationRelativeTo(null);
+                    tm.setVisible(true);
+                    this.dispose();
+                break;
+                case 4:
+                    //nome do objeto
+                    Gerente gerente = new Gerente("joabe", "123",20,"123123", "aa@aa.com", "4564654", Data.getDataAtual(), Data.getDataAtual(), "Gerente", 1);
+                    TelaInicialGerente tg = new TelaInicialGerente(gerente,new Departamento("vendas",1));
+                    tg.setLocationRelativeTo(null);
+                    tg.setVisible(true);
+                    this.dispose();
+                break;
+
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,6 +302,7 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private static javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
