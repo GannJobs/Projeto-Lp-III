@@ -48,7 +48,7 @@ public class Diretor extends Funcionario{
         
         //apagar empregado
 
-        departamento.setGerenteResponsavel(gerentePromovido);
+        //departamento.setGerenteResponsavel(gerentePromovido);
 
         System.out.println("Empregado " + empregado.getNome() + " promovido para o cargo de Gerente.");
         System.out.println("Novo salário base: " + gerentePromovido.getSalario());
