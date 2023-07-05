@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import Classes.Departamento;
 import Classes.Diretor;
 import Classes.Empregado;
 import Classes.Estagiario;
@@ -254,7 +255,7 @@ public abstract class Arquivo {
             return false;
         }
     }
-    
+
     // FUNÇAO DE REMOVER FUNCIONARIO ==============================================================================
     public static boolean removerEmpregado(int str, String arquivo) {
         String chave = String.valueOf(str);
@@ -268,6 +269,90 @@ public abstract class Arquivo {
             String linha;
             boolean encontrado = false;
            //  ========  busca ==========================
+            while ((linha = reader.readLine()) != null) {
+                String[] campos = linha.split(",");
+                String primeiraColuna = campos[0].trim();
+
+                if (primeiraColuna.equals(chave)) {
+                    encontrado = true;
+                    continue; // Ignora a linha atual
+                }
+
+                writer.write(linha);
+                writer.newLine();
+            }
+
+            writer.close();
+            reader.close();
+
+            if (encontrado) {
+                inputFile.delete();
+                tempFile.renameTo(inputFile);
+                return true;
+            } else {
+                tempFile.delete();
+                return false;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    // FUNÇAO DE CARREGAR DEPARTAMENTO ===================================================================================
+    public static List<Departamento> carregaDepartamentos(String arquivo) {
+        List<Departamento> departamentos = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(arquivo))) {
+            String linha;
+            while ((linha = reader.readLine()) != null) {
+                String[] dados = linha.split(",");
+                int codigo = Integer.parseInt(dados[0].trim());
+                String nome = dados[1].trim();
+                int gerenteResponsavel = Integer.parseInt(dados[2].trim());
+            
+
+                Departamento departamento = new Departamento(nome,gerenteResponsavel);
+                departamento.setCodigo(codigo);
+                
+                departamentos.add(departamento);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return departamentos;
+    }
+
+    // FUMÇÃO DE ADICIONAR DEPARTAMENTO AO ARQUIVO ===========================================================================
+    public static boolean adicionarDepartamento(Departamento departamento, String arquivo) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivo, true))) {
+            String linha = departamento.getCodigo() + "," +
+                           departamento.getNome() + "," +
+                           departamento.getGerenteResponsavel();
+
+            writer.write(linha);
+            writer.newLine();
+            writer.flush();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // FUNÇÃO DW ROMOVER DO DEPARTAMENTO ====================================================================================
+    public static boolean removerDepartamento(int codigo, String arquivo) {
+        String chave = String.valueOf(codigo);
+        try {
+            File inputFile = new File(arquivo);
+            File tempFile = new File("temp.txt");
+
+            BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+
+            String linha;
+            boolean encontrado = false;
+
             while ((linha = reader.readLine()) != null) {
                 String[] campos = linha.split(",");
                 String primeiraColuna = campos[0].trim();

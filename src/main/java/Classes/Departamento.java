@@ -22,7 +22,9 @@ public class Departamento {
         this.codigo = NDeps;
         this.gerenteResponsavel = dep.getGerenteResponsavel();
     }
-    
+    public void setCodigo(int codigo){
+        this.codigo = codigo;
+    }
     public int getCodigo(){
         return codigo;
     }
